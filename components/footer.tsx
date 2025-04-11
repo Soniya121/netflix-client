@@ -3,64 +3,20 @@ import { LanguageSelector } from "@/components/language-selector"
 
 const footerLinks = [
   {
-    title: "FAQ",
-    href: "/help/faq",
-  },
-  {
-    title: "Investor Relations",
-    href: "#",
-  },
-  {
     title: "Privacy",
-    href: "#",
-  },
-  {
-    title: "Speed Test",
-    href: "#",
-  },
-  {
-    title: "Help Centre",
-    href: "/help",
-  },
-  {
-    title: "Jobs",
-    href: "#",
-  },
-  {
-    title: "Cookie Preferences",
-    href: "#",
+    href: "/privacy",
   },
   {
     title: "Legal Notices",
-    href: "#",
+    href: "/legal",
   },
   {
-    title: "Account",
-    href: "/account",
-  },
-  {
-    title: "Ways to Watch",
-    href: "#",
-  },
-  {
-    title: "Corporate Information",
-    href: "#",
-  },
-  {
-    title: "Only on Netflix",
-    href: "#",
-  },
-  {
-    title: "Media Centre",
-    href: "#",
-  },
-  {
-    title: "Terms of Use",
-    href: "#",
+    title: "Terms",
+    href: "/terms",
   },
   {
     title: "Contact Us",
-    href: "#",
+    href: "/contact",
   },
 ]
 
@@ -76,9 +32,9 @@ export default function Footer() {
             </a>
           </p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-y-4 gap-x-6 mb-8">
           {footerLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="text-xs hover:underline">
+            <Link key={index} href={link.href} className="text-sm hover:underline">
               {link.title}
             </Link>
           ))}

@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/context/auth-context"
@@ -12,15 +11,41 @@ import { ChevronRight } from "lucide-react"
 export default function LoginForm({ isLoginPage = false }: { isLoginPage?: boolean }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const { login } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectPath = searchParams.get("redirect") || "/browse"
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    login(email)
-    router.push(redirectPath)
+    setError("")
+
+    try {
+      const response = await fetch(`https://netflix-server-3gay.onrender.com/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Login failed")
+      }
+
+      const data = await response.json();
+      // Save token or user info if needed
+      login(data)
+      router.push(redirectPath)
+    } catch (err: any) {
+      console.error("Login error:", err)
+      setError(err.message)
+    }
   }
 
   if (isLoginPage) {
@@ -46,6 +71,7 @@ export default function LoginForm({ isLoginPage = false }: { isLoginPage?: boole
             required
           />
         </div>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <Button type="submit" className="w-full h-12 bg-red-600 hover:bg-red-700 text-white">
           Sign In
         </Button>
@@ -89,4 +115,3 @@ export default function LoginForm({ isLoginPage = false }: { isLoginPage?: boole
     </form>
   )
 }
-

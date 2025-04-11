@@ -1,16 +1,15 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import LoginForm from "@/components/login-form"
+import RegisterForm from "./register"
 import FAQSection from "@/components/faq-section"
-import { Suspense } from "react"
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
       <Header showSignIn={false} showLanguageSelector={false} />
 
-      {/* Login Form with Background */}
+      {/* Register Form with Background */}
       <div className="relative z-10 mx-auto max-w-md px-4 py-16 pt-32 w-[600px]">
         <div className="relative">
           {/* Background Image only behind the form */}
@@ -20,10 +19,8 @@ export default function LoginPage() {
           </div>
 
           <div className="relative z-10 rounded bg-black/80 p-8">
-            <h1 className="mb-6 text-3xl font-bold">Sign In</h1>
-            <Suspense fallback={<h1>Loading...</h1>}>
-            <LoginForm isLoginPage />
-            </Suspense>
+            <h1 className="mb-6 text-3xl font-bold">Sign Up</h1>
+            <RegisterForm />
           </div>
         </div>
       </div>
@@ -38,4 +35,3 @@ export default function LoginPage() {
     </main>
   )
 }
-

@@ -6,6 +6,8 @@ import { useAuth } from "@/context/auth-context"
 import { NetflixLogo } from "@/components/netflix-logo"
 import { LanguageSelector } from "@/components/language-selector"
 import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import AuthDropdown from "./toggle-auth"
 
 type HeaderProps = {
   showSignIn?: boolean
@@ -16,6 +18,7 @@ type HeaderProps = {
 export default function Header({ showSignIn = true, showLanguageSelector = true, transparent = false }: HeaderProps) {
   const { user } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [authOption, setAuthOption] = useState<"signin" | "signup">("signin")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,15 +51,56 @@ export default function Header({ showSignIn = true, showLanguageSelector = true,
                 </Button>
               </Link>
             ) : (
-              <Link href="/login">
-                <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white">
-                  Sign In
-                </Button>
-              </Link>
+              <>
+                {/* Desktop view */}
+                <div className="hidden sm:block">
+                  {/* <ToggleGroup
+                    type="single"
+                    value={authOption}
+                    onValueChange={(value) => value && setAuthOption(value as "signin" | "signup")}
+                  >
+                    <Link href="/login" className="inline-block">
+                      <ToggleGroupItem
+                        value="signin"
+                        className="rounded-l-md bg-red-600 text-white data-[state=on]:bg-red-700"
+                      >
+                        Sign In
+                      </ToggleGroupItem>
+                    </Link>
+                    <Link href="/signup" className="inline-block">
+                      <ToggleGroupItem
+                        value="signup"
+                        className="rounded-r-md bg-red-600 text-white data-[state=on]:bg-red-700"
+                      >
+                        Sign Up
+                      </ToggleGroupItem>
+                    </Link>
+                  </ToggleGroup> */}
+                  <AuthDropdown/>
+                </div>
+
+                {/* Mobile view */}
+                <div className="sm:hidden">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white">
+                        {authOption === "signin" ? "Sign In" : "Sign Up"}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <Link href="/login">
+                        <DropdownMenuItem onClick={() => setAuthOption("signin")}>Sign In</DropdownMenuItem>
+                      </Link>
+                      <Link href="/register">
+                        <DropdownMenuItem onClick={() => setAuthOption("signup")}>Sign Up</DropdownMenuItem>
+                      </Link>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </>
             ))}
         </div>
       </div>
     </header>
   )
 }
-

@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -10,6 +11,15 @@ import { CATEGORIES, getContentByCategory, getContentByType } from "@/lib/consta
 export default function BrowsePage() {
   const searchParams = useSearchParams()
   const category = searchParams.get("category")
+
+  const contentSectionRef = useRef<HTMLDivElement>(null)
+
+  // Scroll to content rows on specific categories
+  useEffect(() => {
+    if (["new", "movies", "tv"].includes(category || "") && contentSectionRef.current) {
+      contentSectionRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [category])
 
   // Get content based on selected category
   let contentRows = []
@@ -75,7 +85,7 @@ export default function BrowsePage() {
       </div>
 
       {/* Content Rows */}
-      <div className="mt-4 space-y-8 pb-16 flex-grow">
+      <div ref={contentSectionRef} className="mt-4 space-y-8 pb-16 flex-grow">
         {contentRows.map((row, index) => (
           <ContentRow key={index} title={row.title} items={row.items} />
         ))}
@@ -88,4 +98,3 @@ export default function BrowsePage() {
     </main>
   )
 }
-

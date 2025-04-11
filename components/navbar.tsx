@@ -6,11 +6,15 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/context/auth-context"
 import { NetflixLogo } from "@/components/netflix-logo"
 import { Bell, Search, ChevronDown } from "lucide-react"
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import AuthDropdown from "./toggle-auth"
 
 export default function Navbar() {
   const { user, logout } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
   const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const [authOption, setAuthOption] = useState<"signin" | "signup">("signin")
   const profileMenuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -88,22 +92,6 @@ export default function Navbar() {
                   New & Popular
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/browse?category=mylist"
-                  className={`${currentCategory === "mylist" ? "text-white font-medium" : "text-gray-300"} hover:text-white`}
-                >
-                  My List
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/browse?category=languages"
-                  className={`${currentCategory === "languages" ? "text-white font-medium" : "text-gray-300"} hover:text-white`}
-                >
-                  Browse by Languages
-                </Link>
-              </li>
             </ul>
           </nav>
           <div className="md:hidden">
@@ -113,9 +101,9 @@ export default function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button className="text-white">
+          {/* <button className="text-white">
             <Search size={20} />
-          </button>
+          </button> */}
 
           {user ? (
             <>
@@ -151,13 +139,28 @@ export default function Navbar() {
               </div>
             </>
           ) : (
-            <Link href="/login" className="rounded bg-red-600 px-4 py-1 text-sm font-medium text-white">
-              Sign In
-            </Link>
+            <>
+              {/* Desktop view */}
+              <div className="hidden md:block">
+                <AuthDropdown/>
+              </div>
+
+              {/* Mobile view */}
+              <div className="md:hidden">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="default" size="sm" className="bg-red-600 hover:bg-red-700 text-white text-sm">
+                      {authOption === "signin" ? "Sign In" : "Sign Up"}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  
+                  <AuthDropdown />
+                </DropdownMenu>
+              </div>
+            </>
           )}
         </div>
       </div>
     </header>
   )
 }
-
