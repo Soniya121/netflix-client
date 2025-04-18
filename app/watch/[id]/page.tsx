@@ -6,30 +6,12 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { getContentById } from "@/lib/constants"
 import Footer from "@/components/footer"
-import { VideoPlayer } from "@/components/video-player"
 import { use } from "react"
 
 // YouTube video IDs for different content
 const YOUTUBE_VIDEOS: Record<string, string> = {
-  "cw1": "sEOuJ4z5aTc", // Brooklyn Nine-Nine
-  "cw2": "dQw4w9WgXcQ", // When Life Gives You Tangerines
-  "cw3": "dQw4w9WgXcQ", // Meenakshi Sundareshwar
-  "cw4": "dQw4w9WgXcQ", // Suits
-  "top6": "dQw4w9WgXcQ", // The Life List
-  "top7": "dQw4w9WgXcQ", // Jawan
-  "top8": "dQw4w9WgXcQ", // Pathaan
-  "act2": "dQw4w9WgXcQ", // The Gray Man
-  "act3": "dQw4w9WgXcQ", // Red Notice
-  "act4": "dQw4w9WgXcQ", // 6 Underground
-  "hor5": "dQw4w9WgXcQ", // His House
-  "kid1": "dQw4w9WgXcQ", // The Mitchells vs. the Machines
-  "kid2": "dQw4w9WgXcQ", // Klaus
-  "kid3": "dQw4w9WgXcQ", // Over the Moon
-  "kid4": "dQw4w9WgXcQ", // The Willoughbys
-  "kid5": "dQw4w9WgXcQ", // The Sea Beast
-  "up3": "dQw4w9WgXcQ", // Mission: Impossible 8
-  "up4": "dQw4w9WgXcQ", // Avatar 3
-  "up5": "dQw4w9WgXcQ", // Deadpool 3
+  "ra1": "https://www.youtube.com/embed/A_HQdwRDRrw?si=Qw8ry69yZXRoCTQS",
+  "ra2": "https://www.youtube.com/embed/aFPRKT7ILtk?si=GpAE6cDKlF_oD5u_"
 }
 
 export default function WatchPage({ params }: { params: Promise<{ id: string }> }) {
@@ -60,7 +42,7 @@ export default function WatchPage({ params }: { params: Promise<{ id: string }> 
     )
   }
 
-  const youtubeVideoId = YOUTUBE_VIDEOS[id] || "dQw4w9WgXcQ" // Fallback to a default video
+  const youtubeVideoId = YOUTUBE_VIDEOS[id] || "https://www.youtube.com/embed/fVeJ6sJERR4?si=BZZA9H9Oiv7LmW6V"
 
   return (
     <main className="min-h-screen bg-black text-white flex flex-col">
@@ -74,7 +56,15 @@ export default function WatchPage({ params }: { params: Promise<{ id: string }> 
         </Link>
 
         {/* Video Player */}
-        <VideoPlayer videoId={youtubeVideoId} title={content.title} />
+        <iframe
+          className="w-full h-[80vh]"
+          src={youtubeVideoId}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
 
         {/* Video Info */}
         <div className="p-6 md:p-12 max-w-4xl mx-auto">
