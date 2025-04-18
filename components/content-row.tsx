@@ -5,15 +5,7 @@ import { useState } from "react"
 import { useAuth } from "@/context/auth-context"
 import { useRouter } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-
-type ContentItem = {
-  id: string
-  title: string
-  thumbnail: string
-  isNew?: boolean
-  isRecentlyAdded?: boolean
-  progress?: number
-}
+import { ContentItem } from "@/lib/constants"
 
 export default function ContentRow({ title, items }: { title: string; items: ContentItem[] }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false)
@@ -39,38 +31,30 @@ export default function ContentRow({ title, items }: { title: string; items: Con
             <ChevronLeft size={40} />
           </button>
         )}
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-1 overflow-x-auto pb-8 scrollbar-hide">
           {items.map((item) => (
-            <div
-            key={item.id}
-            className="relative flex-shrink-0 transition-transform duration-300 hover:scale-105"
-            style={{ width: '240px' }} // Increased from 200px
-          >
             <a
+              key={item.id}
               href={`/watch/${item.id}`}
               onClick={(e) => handleItemClick(item.id, e)}
-              className="block w-full"
+              className="relative flex min-w-[120px] flex-shrink-0 transition-transform duration-300 hover:scale-105 md:min-w-[160px]"
             >
-              <div className="relative w-full pt-[56.25%] overflow-hidden rounded bg-gray-800">
+              <div className="relative aspect-video w-full overflow-hidden rounded bg-gray-800">
                 <img
                   src={item.thumbnail || "/placeholder.svg"}
                   alt={item.title}
-                  className="absolute top-0 left-0 h-full w-full object-cover"
+                  className="h-full w-full object-cover"
                 />
-              </div>
-                {item.progress && (
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-600">
-                    <div className="h-full bg-red-600" style={{ width: `${item.progress}%` }}></div>
-                  </div>
-                )}
-                {item.isNew && (
-                  <div className="absolute left-0 top-0 bg-red-600 px-1 py-0.5 text-[10px] font-bold">New</div>
-                )}
                 {item.isRecentlyAdded && (
                   <div className="absolute bottom-0 right-0 bg-red-600 px-1 py-0.5 text-[10px] font-bold">New</div>
                 )}
-              </a>
-            </div>
+                {item.releaseDate && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-2 py-1 text-[10px] font-medium">
+                    Coming {new Date(item.releaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </div>
+                )}
+              </div>
+            </a>
           ))}
         </div>
         {showRightArrow && (

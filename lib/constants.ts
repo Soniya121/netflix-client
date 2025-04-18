@@ -16,6 +16,7 @@ export const CATEGORIES = {
   CRIME: "Crime TV Shows",
   STAND_UP: "Stand-Up Comedy",
   INTERNATIONAL: "International Movies",
+  UPCOMING: "Upcoming Movies",
 }
 
 // Content Types
@@ -67,8 +68,26 @@ export const LANGUAGES = [
   "Arabic",
 ]
 
+export type ContentItem = {
+  id: string
+  title: string
+  type: string
+  thumbnail: string
+  year: number
+  rating: string
+  duration: string
+  description: string
+  genres?: string[]
+  isNew?: boolean
+  isRecentlyAdded?: boolean
+  progress?: number
+  rank?: number
+  releaseDate?: string
+  category: string
+}
+
 // Sample Content Data
-export const CONTENT_DATA = [
+export const CONTENT_DATA: ContentItem[] = [
   // Trending Now
   {
     id: "t1",
@@ -812,6 +831,83 @@ export const CONTENT_DATA = [
     isNew: false,
     isRecentlyAdded: true,
     category: CATEGORIES.KIDS,
+  },
+
+  // Upcoming Movies
+  {
+    id: "up1",
+    title: "Dune: Part Two",
+    type: CONTENT_TYPE.MOVIE,
+    thumbnail: "https://occ-0-4409-3647.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABcLIFreBhoJFYtDxCv4d2UF3Ws0MkES8unfOhiCVZe1x2lKSsRpLaTkWeBL_v8tzonZOdp_djoqorMh2yvHKjYUidJvFTvEXPKNTH2zABQ15-zEAUv3R_A1NZQF4ETGTCW08Hp_xohNV0_qLAZAuL9eb_k6RRU-Byw7UEm_kef2js7CGJl4zf2JR7sppLWv6XkCrlJ7B2E3P7eu-YkBmnrtL3bLWBtf8mbtTSvA.webp?r=171",
+    year: 2024,
+    rating: "PG-13",
+    duration: "2h 46m",
+    description: "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+    genres: ["Sci-Fi", "Adventure", "Drama"],
+    isNew: true,
+    isRecentlyAdded: true,
+    releaseDate: "2024-03-15",
+    category: CATEGORIES.UPCOMING,
+  },
+  {
+    id: "up2",
+    title: "The Marvels",
+    type: CONTENT_TYPE.MOVIE,
+    thumbnail: "https://occ-0-4409-3647.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABcElkyM94KkV-6JkAEl5bG0HCdJ9f7eEfQVrbLLZybJIsToWaPi_BCtUciYVN9g2OvedFq2i7OVbTQwtkq75HqWfzLttEcTqhWs.webp?r=d5d",
+    year: 2024,
+    rating: "PG-13",
+    duration: "1h 45m",
+    description: "Carol Danvers, Kamala Khan, and Monica Rambeau team up to save the universe.",
+    genres: ["Action", "Adventure", "Sci-Fi"],
+    isNew: true,
+    isRecentlyAdded: true,
+    releaseDate: "2024-04-05",
+    category: CATEGORIES.UPCOMING,
+  },
+  {
+    id: "up3",
+    title: "Mission: Impossible 8",
+    type: CONTENT_TYPE.MOVIE,
+    thumbnail: "https://occ-0-4409-3647.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABXYMhXXEQhdb6SVolS8l3_NVi501UlwW5gzC56BWt4BbD2oR6QSeO5vvCy4SA4dLDh329eZa9mNKZszNyJ1icHmggBHYP8H1BufjN7uQ1g_BPTyIjBjmIYlH-7BZt0jI9Q3O.jpg?r=67e",
+    year: 2024,
+    rating: "PG-13",
+    duration: "2h 30m",
+    description: "Ethan Hunt and his IMF team must track down a terrifying new weapon that threatens all of humanity.",
+    genres: ["Action", "Adventure", "Thriller"],
+    isNew: true,
+    isRecentlyAdded: true,
+    releaseDate: "2024-06-28",
+    category: CATEGORIES.UPCOMING,
+  },
+  {
+    id: "up4",
+    title: "Avatar 3",
+    type: CONTENT_TYPE.MOVIE,
+    thumbnail: "https://occ-0-4409-3647.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABdXQ6zIcTamlrXVQNNmh0uk6qZL7ZJEcZN39tEavsDM1tePha9wecQ_ESsfeQ3whe9ypoDzTJ09152ASHl0Gr0r_DWqJdxLtGv9qbreTpDIPISk2bC_7qvtBA1_HfT6xbZ9tvL_TRbAxYcGx-1TEaHUDcSKGKYMfUxMf6kbYh3aMboNF_fZ7ZVZP-yqq5adc-OC84jhwAdys6w0r_ZAhUgB32x__9qWeVM_XaOM.webp?r=300",
+    year: 2024,
+    rating: "PG-13",
+    duration: "3h 10m",
+    description: "The next chapter in the epic saga of Pandora and the Na'vi people.",
+    genres: ["Action", "Adventure", "Sci-Fi"],
+    isNew: true,
+    isRecentlyAdded: true,
+    releaseDate: "2024-12-20",
+    category: CATEGORIES.UPCOMING,
+  },
+  {
+    id: "up5",
+    title: "Deadpool 3",
+    type: CONTENT_TYPE.MOVIE,
+    thumbnail: "https://occ-0-4409-3647.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABUITJV66q8-YnlHqdKZxMEXFx9b5sKBtxqBXRy00LAyvA6VX3X0G_9FywtpiPgU31iMkSJ69IDGEujZDaH7guWcMxc7N2K53pGM.webp?r=1a5",
+    year: 2024,
+    rating: "R",
+    duration: "2h 15m",
+    description: "Deadpool joins forces with Wolverine to take on a common enemy.",
+    genres: ["Action", "Comedy", "Sci-Fi"],
+    isNew: true,
+    isRecentlyAdded: true,
+    releaseDate: "2024-07-26",
+    category: CATEGORIES.UPCOMING,
   },
 ]
 

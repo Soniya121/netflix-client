@@ -11,7 +11,7 @@ const footerLinks = [
     href: "/legal",
   },
   {
-    title: "Terms",
+    title: "Terms & Conditions",
     href: "/terms",
   },
   {

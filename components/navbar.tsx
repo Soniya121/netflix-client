@@ -86,6 +86,14 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
+                  href="/browse?category=upcoming"
+                  className={`${currentCategory === "upcoming" ? "text-white font-medium" : "text-gray-300"} hover:text-white`}
+                >
+                  Upcoming
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/browse?category=new"
                   className={`${currentCategory === "new" ? "text-white font-medium" : "text-gray-300"} hover:text-white`}
                 >

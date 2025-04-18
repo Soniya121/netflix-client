@@ -16,7 +16,7 @@ export default function BrowsePage() {
 
   // Scroll to content rows on specific categories
   useEffect(() => {
-    if (["new", "movies", "tv"].includes(category || "") && contentSectionRef.current) {
+    if (["new", "movies", "tv", "upcoming"].includes(category || "") && contentSectionRef.current) {
       contentSectionRef.current.scrollIntoView({ behavior: "smooth" })
     }
   }, [category])
@@ -44,6 +44,11 @@ export default function BrowsePage() {
       { title: "New Releases", items: newContent.filter((item) => item.isNew).slice(0, 12) },
       { title: "Recently Added", items: newContent.filter((item) => item.isRecentlyAdded).slice(0, 12) },
     ]
+  } else if (category === "upcoming") {
+    const upcomingMovies = getContentByCategory(CATEGORIES.UPCOMING)
+    contentRows = [
+      { title: "Coming Soon", items: upcomingMovies },
+    ]
   } else {
     // Default home view
     contentRows = [
@@ -52,6 +57,7 @@ export default function BrowsePage() {
       { title: CATEGORIES.ACTION, items: getContentByCategory(CATEGORIES.ACTION) },
       { title: CATEGORIES.HORROR, items: getContentByCategory(CATEGORIES.HORROR) },
       { title: CATEGORIES.KIDS, items: getContentByCategory(CATEGORIES.KIDS) },
+      { title: CATEGORIES.UPCOMING, items: getContentByCategory(CATEGORIES.UPCOMING).slice(0, 5) },
     ]
   }
 
