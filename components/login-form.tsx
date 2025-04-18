@@ -38,8 +38,7 @@ export default function LoginForm({ isLoginPage = false }: { isLoginPage?: boole
         throw new Error(errorData.message || "Login failed")
       }
 
-      const data = await response.json();
-      // Save token or user info if needed
+      const data = await response.json()
       login(data)
       router.push(redirectPath)
     } catch (err: any) {
@@ -82,9 +81,14 @@ export default function LoginForm({ isLoginPage = false }: { isLoginPage?: boole
               Remember me
             </label>
           </div>
-          <a href="#" className="text-gray-400 hover:underline">
-            Need help?
-          </a>
+          <div className="flex gap-4">
+            {/* <a href="#" className="text-gray-400 hover:underline">
+              Need help?
+            </a> */}
+            <a href="/reset" className="text-gray-400 hover:underline">
+              Forgot password?
+            </a>
+          </div>
         </div>
         <div className="mt-12 text-gray-400 text-sm">
           <p>
