@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import ContentRow from "@/components/content-row"
 import TopTenRow from "@/components/top-ten-row"
 import { CATEGORIES, getContentByCategory, getContentByType } from "@/lib/constants"
+import Link from "next/link"
 
 export default function BrowsePage() {
   const searchParams = useSearchParams()
@@ -80,12 +81,12 @@ export default function BrowsePage() {
             supernatural forces and one strange little girl.
           </p>
           <div className="mt-4 flex gap-3">
-            <button className="flex items-center gap-2 rounded bg-white px-6 py-2 font-semibold text-black">
+            <Link href={'/watch/ra1'} className="flex items-center gap-2 rounded bg-white px-6 py-2 font-semibold text-black" >
               <span>▶</span> Play
-            </button>
-            <button className="flex items-center gap-2 rounded bg-gray-500/70 px-6 py-2 font-semibold text-white">
+            </Link>
+            {/* <button className="flex items-center gap-2 rounded bg-gray-500/70 px-6 py-2 font-semibold text-white">
               <span></span> More Info
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
