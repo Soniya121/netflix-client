@@ -81,7 +81,7 @@ export default function BrowsePage() {
             supernatural forces and one strange little girl.
           </p>
           <div className="mt-4 flex gap-3">
-            <Link href={'/watch/ra1'} className="flex items-center gap-2 rounded bg-white px-6 py-2 font-semibold text-black" >
+            <Link href={'/watch/ra4'} className="flex items-center gap-2 rounded bg-white px-6 py-2 font-semibold text-black" >
               <span>▶</span> Play
             </Link>
             {/* <button className="flex items-center gap-2 rounded bg-gray-500/70 px-6 py-2 font-semibold text-white">

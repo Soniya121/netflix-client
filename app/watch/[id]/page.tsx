@@ -11,7 +11,10 @@ import { use } from "react"
 // YouTube video IDs for different content
 const YOUTUBE_VIDEOS: Record<string, string> = {
   "ra1": "https://www.youtube.com/embed/A_HQdwRDRrw?si=Qw8ry69yZXRoCTQS",
-  "ra2": "https://www.youtube.com/embed/aFPRKT7ILtk?si=GpAE6cDKlF_oD5u_"
+  "ra2": "https://www.youtube.com/embed/aFPRKT7ILtk?si=GpAE6cDKlF_oD5u_",
+  "ra3": "https://www.youtube.com/embed/S3wdXKSr12M?si=ndx2g94d2WjD4jS4",
+  "ra4": "https://www.youtube.com/embed/QYssI9OlVvg?si=g_UPFV5TKVNTDUSL",
+  "ra5": "https://www.youtube.com/embed/__IuwddG0VM?si=Y7TMuRWjgvYNOaxH"
 }
 
 export default function WatchPage({ params }: { params: Promise<{ id: string }> }) {
